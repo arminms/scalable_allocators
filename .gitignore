@@ -1,5 +1,5 @@
+# cmake
 build*
-.vscode
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -11,3 +11,10 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+# vscode
+.vscode
+
+# external dependency folders
+external/benchmark/
+

@@ -53,17 +53,17 @@ endif()
 #   endif(NOT PSTL_FOUND AND BUILD_MISSING_DEPENDENCIES)
 # endif(CMAKE_TOOLCHAIN_FILE)
 
-# # find/clone Google Benchmark
-# if(CMAKE_TOOLCHAIN_FILE)
-#   find_package(benchmark CONFIG REQUIRED)
-#   message(STATUS "Found Google Benchmark library")
-#   set(BENCHMARK_TARGET benchmark::benchmark)
-# else(CMAKE_TOOLCHAIN_FILE)
-#   find_package(benchmark
-#       CONFIG
-#       HINTS /usr/local /opt/local /opt $ENV{HOME}
-#     )
-#   include(external/benchmark.cmake)
-# endif(CMAKE_TOOLCHAIN_FILE)
+# find/clone Google Benchmark
+if(CMAKE_TOOLCHAIN_FILE)
+  find_package(benchmark CONFIG REQUIRED)
+  message(STATUS "Found Google Benchmark library")
+  set(BENCHMARK_TARGET benchmark::benchmark)
+else(CMAKE_TOOLCHAIN_FILE)
+  find_package(benchmark
+      CONFIG
+      HINTS /usr/local /opt/local /opt $ENV{HOME}
+    )
+  include(external/benchmark.cmake)
+endif(CMAKE_TOOLCHAIN_FILE)
 
 # add_subdirectory(src)
