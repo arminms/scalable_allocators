@@ -17,4 +17,7 @@ _deps
 
 # external dependency folders
 external/benchmark/
+external/oneTBB/
+external/oneDPL/
+
 
