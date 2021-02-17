@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.7)
 
-# include(cmake/BuildType.cmake)
+include(cmake/BuildType.cmake)
 
 option(USE_VCPKG "Use vcpkg C++ library manager if exists ?" ON)
 if(${USE_VCPKG} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
