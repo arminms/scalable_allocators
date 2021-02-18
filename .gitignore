@@ -16,7 +16,7 @@ _deps
 .vscode
 
 # external dependency folders
-#external/benchmark/
+external/benchmark/
 external/oneTBB/
 external/oneDPL/
 
