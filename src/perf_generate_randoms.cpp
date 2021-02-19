@@ -1,9 +1,13 @@
 #include <iostream>
 #include <random>
 
-#include <pstl/algorithm>
-#include <pstl/numeric>
-#include <pstl/execution>
+#include <algorithm>
+#include <numeric>
+#include <execution>
+
+// #include <pstl/algorithm>
+// #include <pstl/numeric>
+// #include <pstl/execution>
 
 #include <benchmark/benchmark.h>
 
@@ -28,7 +32,7 @@ BENCHMARK_CAPTURE(GR_float, seq, std::execution::seq)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
-BENCHMARK_CAPTURE(GR_float, par, pstl::execution::par)
+BENCHMARK_CAPTURE(GR_float, par, std::execution::par)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);

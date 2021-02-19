@@ -1,14 +1,18 @@
 #include <iostream>
 #include <random>
 
-#define TBB_PREVIEW_MEMORY_POOL 1
-#include <tbb/memory_pool.h>
+// #include <pstl/algorithm>
+// #include <pstl/numeric>
+// #include <pstl/execution>
+
+#include <algorithm>
+#include <numeric>
+#include <execution>
+
+// #define TBB_PREVIEW_MEMORY_POOL 1
+// #include <tbb/memory_pool.h>
 #include <tbb/scalable_allocator.h>
 #include <tbb/cache_aligned_allocator.h>
-
-#include <pstl/algorithm>
-#include <pstl/numeric>
-#include <pstl/execution>
 
 #include <benchmark/benchmark.h>
 
@@ -41,7 +45,7 @@ BENCHMARK_CAPTURE(RMSD_float, seq, std::execution::seq)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
-BENCHMARK_CAPTURE(RMSD_float, par, pstl::execution::par)
+BENCHMARK_CAPTURE(RMSD_float, par, std::execution::par)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
@@ -84,7 +88,7 @@ BENCHMARK_CAPTURE(SA_RMSD_float, seq, std::execution::seq)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
-BENCHMARK_CAPTURE(SA_RMSD_float, par, pstl::execution::par)
+BENCHMARK_CAPTURE(SA_RMSD_float, par, std::execution::par)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
