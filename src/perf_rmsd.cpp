@@ -36,14 +36,14 @@ static void RMSD_float(
     }
 }
 
-// BENCHMARK_CAPTURE(RMSD_float, seq, std::execution::seq)
-// ->  RangeMultiplier(2)
-// ->  Range(1<<30, 1<<31)
-// ->  Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(RMSD_float, seq, std::execution::seq)
+->  RangeMultiplier(2)
+->  Range(1<<20, 1<<24)
+->  Unit(benchmark::kMillisecond);
 
 BENCHMARK_CAPTURE(RMSD_float, par, pstl::execution::par)
 ->  RangeMultiplier(2)
-->  Range(1<<26, 1<<28)
+->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
 // BENCHMARK_CAPTURE(RMSD_float, unseq, pstl::execution::unseq)
@@ -79,14 +79,14 @@ static void SA_RMSD_float(
     }
 }
 
-// BENCHMARK_CAPTURE(SA_RMSD_float, seq, std::execution::seq)
-// ->  RangeMultiplier(2)
-// ->  Range(1<<30, 1<<31)
-// ->  Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(SA_RMSD_float, seq, std::execution::seq)
+->  RangeMultiplier(2)
+->  Range(1<<20, 1<<24)
+->  Unit(benchmark::kMillisecond);
 
 BENCHMARK_CAPTURE(SA_RMSD_float, par, pstl::execution::par)
 ->  RangeMultiplier(2)
-->  Range(1<<26, 1<<28)
+->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
 // BENCHMARK_CAPTURE(SA_RMSD_float, unseq, pstl::execution::unseq)
