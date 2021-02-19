@@ -15,14 +15,12 @@ template
 ,   class OutputIt
 ,   class Size1
 ,   class Size2
-,   class RNG
 >
 inline void generate_randoms(
     ExecutionPolicy&& policy
 ,   OutputIt first
 ,   Size1 n
-,   Size2 d
-,   RNG eng)
+,   Size2 d)
 {
     typedef typename std::iterator_traits<OutputIt>::value_type T;
 
@@ -36,8 +34,8 @@ inline void generate_randoms(
     ,   tbb::counting_iterator<Size1>(n * d)
     ,   [&] (Size1 i)
     {
-        thread_local RNG teng = eng;
-        *(first+i) = dists[i%d](teng);
+        thread_local std::mt19937 rng;
+        *(first+i) = dists[i%d](rng);
     } );
 }
 

@@ -25,15 +25,13 @@ static void RMSD_float(
 ,   Policy ep)
 {
     size_t d = 3; // dimention
-    std::mt19937 eng;
-
     for (auto _ : st)
     {
         std::vector<float> A(st.range() * d);
         std::vector<float> B(st.range() * d);
 
-        generate_randoms(ep, A.begin(), st.range(), d, eng);
-        generate_randoms(ep, B.begin(), st.range(), d, eng);
+        generate_randoms(ep, A.begin(), st.range(), d);
+        generate_randoms(ep, B.begin(), st.range(), d);
 
         float r = rmsd(ep, A.begin(), B.begin(), st.range(), d);
         benchmark::DoNotOptimize(r);
@@ -66,8 +64,6 @@ static void SA_RMSD_float(
 ,   Policy ep)
 {
     size_t d = 3; // dimention
-    std::mt19937 eng;
-
     for (auto _ : st)
     {
         std::vector<float, tbb::scalable_allocator<float>> A(st.range() * d);
@@ -75,11 +71,11 @@ static void SA_RMSD_float(
         // std::vector<float, tbb::cache_aligned_allocator<float>> A(st.range() * d);
         // std::vector<float, tbb::cache_aligned_allocator<float>> B(st.range() * d);
 
-        generate_randoms(ep, A.begin(), st.range(), d, eng);
-        generate_randoms(ep, B.begin(), st.range(), d, eng);
+        generate_randoms(ep, A.begin(), st.range(), d);
+        generate_randoms(ep, B.begin(), st.range(), d);
 
         float r = rmsd(ep, A.begin(), B.begin(), st.range(), d);
-        // benchmark::DoNotOptimize(r);
+        benchmark::DoNotOptimize(r);
     }
 }
 
