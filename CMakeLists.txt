@@ -34,6 +34,11 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH true)
 
 option(BUILD_MISSING_DEPENDENCIES "Clone/Build missing dependencies ?" ON)
 
+# Visual Studio C++ specific
+if(MSVC)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4244") # Warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+endif(MSVC)
+
 # check/add compiler OpenMP support flags
 find_package(OpenMP)
 if (OPENMP_FOUND OR OPENMP_CXX_FOUND)

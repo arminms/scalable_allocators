@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <array>
 
 // #include <pstl/algorithm>
 // #include <pstl/numeric>
@@ -55,8 +56,8 @@ static void SA_RMSD_VEC_float(
     const size_t d = 3; // dimention
     for (auto _ : st)
     {
-        std::vector<std::array<float, d>, tbb::scalable_allocator<float>> A(st.range());
-        std::vector<std::array<float, d>, tbb::scalable_allocator<float>> B(st.range());
+        std::vector<std::array<float, d>, tbb::scalable_allocator<std::array<float, d>>> A(st.range());
+        std::vector<std::array<float, d>, tbb::scalable_allocator<std::array<float, d>>> B(st.range());
 
         generate_randoms_array(ep, A.begin(), st.range(), d);
         generate_randoms_array(ep, B.begin(), st.range(), d);

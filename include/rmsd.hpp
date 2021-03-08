@@ -5,7 +5,7 @@
 #include <numeric>
 #include <cmath>
 
-#include <tbb/iterators.h>
+// #include <tbb/iterators.h>
 
 //----------------------------------------------------------------------------//
 
@@ -35,9 +35,11 @@ inline T rmsd(
 {
     T r = std::transform_reduce(
         std::forward<ExecutionPolicy>(policy)
+    // ,   first1 + 1
     ,   first1
     ,   first1 + n
     ,   first2
+    // ,   *first1 +  sq(*first1 - *first2)
     ,   T(0)
     ,   [] (T lhs, T rhs) -> T { return lhs + rhs; }
     ,   [] (T lhs, T rhs) -> T { return sq(lhs - rhs); }
