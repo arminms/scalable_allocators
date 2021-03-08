@@ -2,8 +2,9 @@ include_directories(../include)
 
 
 set(BENCHMARKS
-  rmsd
   generate_randoms
+  rmsd
+  rmsd_vec
 )
 
 foreach(BENCHMARK ${BENCHMARKS})
