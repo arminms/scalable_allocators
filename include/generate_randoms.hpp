@@ -31,7 +31,8 @@ inline void generate_randoms(
     ,   tbb::counting_iterator<Size1>(n * d)
     ,   [&] (Size1 i)
     {
-        thread_local std::mt19937 rng;
+        thread_local std::default_random_engine rng;
+        // thread_local std::mt19937 rng;
         *(first+i) = dist(rng);
     } );
 }

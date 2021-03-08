@@ -35,7 +35,7 @@ static void RMSD_VEC_float(
         r = rmsd_array<float>(ep, A.begin(), B.begin(), st.range(), d);
         benchmark::DoNotOptimize(r);
     }
-    std::cout << r << std::endl;
+    // std::cout << r << std::endl;
 }
 
 BENCHMARK_CAPTURE(RMSD_VEC_float, seq, std::execution::seq)

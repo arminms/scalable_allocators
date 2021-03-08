@@ -25,11 +25,11 @@ static void RMSD_float(
 ,   Policy ep)
 {
     size_t d = 3; // dimention
-    float r{};
+    double r{};
     for (auto _ : st)
     {
-        std::vector<float> A(st.range() * d);
-        std::vector<float> B(st.range() * d);
+        std::vector<double> A(st.range() * d);
+        std::vector<double> B(st.range() * d);
 
         generate_randoms(ep, A.begin(), st.range(), d);
         generate_randoms(ep, B.begin(), st.range(), d);
@@ -37,7 +37,7 @@ static void RMSD_float(
         r = rmsd(ep, A.begin(), B.begin(), st.range(), d);
         benchmark::DoNotOptimize(r);
     }
-    std::cout << r << std::endl;
+    // std::cout << r << std::endl;
 }
 
 BENCHMARK_CAPTURE(RMSD_float, seq, std::execution::seq)
