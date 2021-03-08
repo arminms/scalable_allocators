@@ -22,7 +22,7 @@ static void GR_float(
     benchmark::State& st
 ,   Policy ep)
 {
-    size_t d = 3; // dimention
+    size_t d = 3; // dimension
     for (auto _ : st)
     {
         std::vector<float> A(st.range() * d);
@@ -45,7 +45,7 @@ static void SA_GR_float(
     benchmark::State& st
 ,   Policy ep)
 {
-    size_t d = 3; // dimention
+    size_t d = 3; // dimension
     for (auto _ : st)
     {
         std::vector<float, tbb::scalable_allocator<float>> A(st.range() * d);
