@@ -22,7 +22,7 @@ static void RMSD_VEC_float(
     benchmark::State& st
 ,   Policy ep)
 {
-    const size_t d = 3; // dimention
+    const size_t d = 3; // dimension
     float r{};
     for (auto _ : st)
     {
@@ -52,7 +52,7 @@ static void SA_RMSD_VEC_float(
     benchmark::State& st
 ,   Policy ep)
 {
-    const size_t d = 3; // dimention
+    const size_t d = 3; // dimension
     for (auto _ : st)
     {
         std::vector<std::array<float, d>, tbb::scalable_allocator<std::array<float, d>>> A(st.range());

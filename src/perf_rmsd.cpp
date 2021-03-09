@@ -24,7 +24,7 @@ static void RMSD_float(
     benchmark::State& st
 ,   Policy ep)
 {
-    size_t d = 3; // dimention
+    size_t d = 3; // dimension
     double r{};
     for (auto _ : st)
     {
@@ -64,7 +64,7 @@ static void SA_RMSD_float(
     benchmark::State& st
 ,   Policy ep)
 {
-    size_t d = 3; // dimention
+    size_t d = 3; // dimension
     for (auto _ : st)
     {
         std::vector<float, tbb::scalable_allocator<float>> A(st.range() * d);
