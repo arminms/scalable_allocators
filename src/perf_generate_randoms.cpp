@@ -26,7 +26,8 @@ static void GR_float(
     for (auto _ : st)
     {
         std::vector<float> A(st.range() * d);
-        generate_randoms(ep, A.begin(), st.range(), d);
+        std::vector<float> B(st.range() * d);
+        generate_randoms(ep, A.begin(), B.begin(), st.range(), d);
     }
 }
 
@@ -49,7 +50,8 @@ static void SA_GR_float(
     for (auto _ : st)
     {
         std::vector<float, tbb::scalable_allocator<float>> A(st.range() * d);
-        generate_randoms(ep, A.begin(), st.range(), d);
+        std::vector<float, tbb::scalable_allocator<float>> B(st.range() * d);
+        generate_randoms(ep, A.begin(), B.begin(), st.range(), d);
     }
 }
 

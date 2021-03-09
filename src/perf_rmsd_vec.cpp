@@ -29,8 +29,7 @@ static void RMSD_VEC_float(
         std::vector<std::array<float, d>> A(st.range());
         std::vector<std::array<float, d>> B(st.range());
 
-        generate_randoms_array(ep, A.begin(), st.range(), d);
-        generate_randoms_array(ep, B.begin(), st.range(), d);
+        generate_randoms_array(ep, A.begin(), B.begin(), st.range(), d);
 
         r = rmsd_array<float>(ep, A.begin(), B.begin(), st.range(), d);
         benchmark::DoNotOptimize(r);
@@ -59,8 +58,7 @@ static void SA_RMSD_VEC_float(
         std::vector<std::array<float, d>, tbb::scalable_allocator<std::array<float, d>>> A(st.range());
         std::vector<std::array<float, d>, tbb::scalable_allocator<std::array<float, d>>> B(st.range());
 
-        generate_randoms_array(ep, A.begin(), st.range(), d);
-        generate_randoms_array(ep, B.begin(), st.range(), d);
+        generate_randoms_array(ep, A.begin(), B.begin(), st.range(), d);
 
         float r = rmsd_array<float>(ep, A.begin(), B.begin(), st.range(), d);
         benchmark::DoNotOptimize(r);

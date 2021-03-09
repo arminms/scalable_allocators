@@ -31,8 +31,7 @@ static void RMSD_float(
         std::vector<double> A(st.range() * d);
         std::vector<double> B(st.range() * d);
 
-        generate_randoms(ep, A.begin(), st.range(), d);
-        generate_randoms(ep, B.begin(), st.range(), d);
+        generate_randoms(ep, A.begin(), B.begin(), st.range(), d);
 
         r = rmsd(ep, A.begin(), B.begin(), st.range(), d);
         benchmark::DoNotOptimize(r);
@@ -73,8 +72,7 @@ static void SA_RMSD_float(
         // std::vector<float, tbb::cache_aligned_allocator<float>> A(st.range() * d);
         // std::vector<float, tbb::cache_aligned_allocator<float>> B(st.range() * d);
 
-        generate_randoms(ep, A.begin(), st.range(), d);
-        generate_randoms(ep, B.begin(), st.range(), d);
+        generate_randoms(ep, A.begin(), B.begin(), st.range(), d);
 
         float r = rmsd(ep, A.begin(), B.begin(), st.range(), d);
         benchmark::DoNotOptimize(r);
