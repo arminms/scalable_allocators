@@ -1,10 +1,6 @@
 #include <iostream>
 #include <random>
 
-// #include <pstl/algorithm>
-// #include <pstl/numeric>
-// #include <pstl/execution>
-
 #include <algorithm>
 #include <numeric>
 #include <execution>
@@ -44,10 +40,12 @@ BENCHMARK_CAPTURE(RMSD, seq, std::execution::seq)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
+#ifndef _MSC_VER
 BENCHMARK_CAPTURE(RMSD, unseq, std::execution::unseq)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
+#endif  //_MSC_VER
 
 BENCHMARK_CAPTURE(RMSD, par, std::execution::par)
 ->  RangeMultiplier(2)
@@ -84,10 +82,12 @@ BENCHMARK_CAPTURE(RMSD_TBBSA, seq, std::execution::seq)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
+#ifndef _MSC_VER
 BENCHMARK_CAPTURE(RMSD_TBBSA, unseq, std::execution::unseq)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
+#endif  //_MSC_VER
 
 BENCHMARK_CAPTURE(RMSD_TBBSA, par, std::execution::par)
 ->  RangeMultiplier(2)

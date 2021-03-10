@@ -41,6 +41,7 @@ option(BUILD_MISSING_DEPENDENCIES "Clone/Build missing dependencies ?" ON)
 # Visual Studio C++ specific
 if(MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4244") # Warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4267") # Warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 endif(MSVC)
 
 # check/add compiler OpenMP support flags

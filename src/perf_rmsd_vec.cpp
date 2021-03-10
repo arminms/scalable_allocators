@@ -2,10 +2,6 @@
 #include <random>
 #include <array>
 
-// #include <pstl/algorithm>
-// #include <pstl/numeric>
-// #include <pstl/execution>
-
 #include <algorithm>
 #include <numeric>
 #include <execution>
