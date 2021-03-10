@@ -20,7 +20,7 @@
 #include <rmsd.hpp>
 
 template <typename Policy>
-static void RMSD_float(
+static void RMSD(
     benchmark::State& st
 ,   Policy ep)
 {
@@ -39,28 +39,28 @@ static void RMSD_float(
     // std::cout << r << std::endl;
 }
 
-BENCHMARK_CAPTURE(RMSD_float, seq, std::execution::seq)
+BENCHMARK_CAPTURE(RMSD, seq, std::execution::seq)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
-BENCHMARK_CAPTURE(RMSD_float, par, std::execution::par)
+BENCHMARK_CAPTURE(RMSD, unseq, std::execution::unseq)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
-// BENCHMARK_CAPTURE(RMSD_float, unseq, pstl::execution::unseq)
-// ->  RangeMultiplier(2)
-// ->  Range(1<<20, 1<<24)
-// ->  Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(RMSD, par, std::execution::par)
+->  RangeMultiplier(2)
+->  Range(1<<20, 1<<24)
+->  Unit(benchmark::kMillisecond);
 
-// BENCHMARK_CAPTURE(RMSD_float, par_unseq, pstl::execution::par_unseq)
-// ->  RangeMultiplier(2)
-// ->  Range(1<<20, 1<<24)
-// ->  Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(RMSD, par_unseq, std::execution::par_unseq)
+->  RangeMultiplier(2)
+->  Range(1<<20, 1<<24)
+->  Unit(benchmark::kMillisecond);
 
 template <typename Policy>
-static void SA_RMSD_float(
+static void RMSD_TBBSA(
     benchmark::State& st
 ,   Policy ep)
 {
@@ -79,24 +79,24 @@ static void SA_RMSD_float(
     }
 }
 
-BENCHMARK_CAPTURE(SA_RMSD_float, seq, std::execution::seq)
+BENCHMARK_CAPTURE(RMSD_TBBSA, seq, std::execution::seq)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
-BENCHMARK_CAPTURE(SA_RMSD_float, par, std::execution::par)
+BENCHMARK_CAPTURE(RMSD_TBBSA, unseq, std::execution::unseq)
 ->  RangeMultiplier(2)
 ->  Range(1<<20, 1<<24)
 ->  Unit(benchmark::kMillisecond);
 
-// BENCHMARK_CAPTURE(SA_RMSD_float, unseq, pstl::execution::unseq)
-// ->  RangeMultiplier(2)
-// ->  Range(1<<20, 1<<24)
-// ->  Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(RMSD_TBBSA, par, std::execution::par)
+->  RangeMultiplier(2)
+->  Range(1<<20, 1<<24)
+->  Unit(benchmark::kMillisecond);
 
-// BENCHMARK_CAPTURE(SA_RMSD_float, par_unseq, pstl::execution::par_unseq)
-// ->  RangeMultiplier(2)
-// ->  Range(1<<20, 1<<24)
-// ->  Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(RMSD_TBBSA, par_unseq, std::execution::par_unseq)
+->  RangeMultiplier(2)
+->  Range(1<<20, 1<<24)
+->  Unit(benchmark::kMillisecond);
 
 BENCHMARK_MAIN();
