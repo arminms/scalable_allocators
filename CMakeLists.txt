@@ -76,7 +76,7 @@ else(CMAKE_TOOLCHAIN_FILE)
   include(external/benchmark.cmake)
 endif(CMAKE_TOOLCHAIN_FILE)
 
-option(BUILD_TESTS "Build the unit tests ?" ON)
+option(BUILD_TESTS "Build the unit tests ?" OFF)
 if(${BUILD_TESTS})
   find_package(Boost 1.61 REQUIRED COMPONENTS system unit_test_framework)
   enable_testing()
