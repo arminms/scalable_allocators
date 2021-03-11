@@ -1,7 +1,6 @@
 #ifndef SA_GENERATE_RANDOMS_HPP
 #define SA_GENERATE_RANDOMS_HPP
 
-#include <vector>
 #include <algorithm>
 #include <random>
 #include <thread>

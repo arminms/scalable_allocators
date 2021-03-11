@@ -35,11 +35,9 @@ inline T rmsd(
 {
     T r = std::transform_reduce(
         std::forward<ExecutionPolicy>(policy)
-    // ,   first1 + 1
     ,   first1
-    ,   first1 + n
+    ,   first1 + (n * d)
     ,   first2
-    // ,   *first1 +  sq(*first1 - *first2)
     ,   T(0)
     ,   [] (T lhs, T rhs) -> T { return lhs + rhs; }
     ,   [] (T lhs, T rhs) -> T { return sq(lhs - rhs); }
@@ -71,7 +69,7 @@ inline T rmsd_array(
     Array a = std::transform_reduce(
         std::forward<ExecutionPolicy>(policy)
     ,   first1
-    ,   first1 + n
+    ,   first1 + (n * d)
     ,   first2
     ,   Array{}
     ,   [d] (Array lhs, Array rhs) -> Array
