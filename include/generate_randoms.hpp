@@ -67,7 +67,7 @@ inline void generate_randoms_array(
     std::for_each(
         std::forward<ExecutionPolicy>(policy)
     ,   tbb::counting_iterator<Size1>(0)
-    ,   tbb::counting_iterator<Size1>(n)
+    ,   tbb::counting_iterator<Size1>(n * d)
     ,   [&] (Size1 i)
     {
         thread_local std::default_random_engine rng1(hasher(std::this_thread::get_id()));
