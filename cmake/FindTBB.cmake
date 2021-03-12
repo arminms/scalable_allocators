@@ -92,7 +92,7 @@
 
 include(FindPackageHandleStandardArgs)
 
-if(NOT PSTL_FOUND)
+if(NOT TBB_FOUND)
 
   ##################################
   # Check the build type
