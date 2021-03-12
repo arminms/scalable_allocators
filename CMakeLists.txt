@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.15)
 
 include(cmake/BuildType.cmake)
 
@@ -36,7 +36,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH true)
 #   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -qopenmp-simd -ipo -O3 -xSSE4.2")
 # endif()
 
-option(BUILD_MISSING_DEPENDENCIES "Clone/Build missing dependencies ?" ON)
+option(BUILD_MISSING_DEPENDENCIES "Clone/Build missing dependencies ?" OFF)
 
 # Visual Studio C++ specific
 if(MSVC)
@@ -50,17 +50,20 @@ if (OPENMP_FOUND OR OPENMP_CXX_FOUND)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 
-# find/clone Intel Threading Building Blocks (TBB) and ParallelSTL
+# find/clone Intel Threading Building Blocks (TBB)
 if(CMAKE_TOOLCHAIN_FILE)
   find_package(TBB CONFIG REQUIRED)
-  # find_package(ParallelSTL CONFIG REQUIRED)
   message(STATUS "Found Intel TBB library")
 else(CMAKE_TOOLCHAIN_FILE)
-  find_package(PSTL COMPONENTS tbbmalloc)
-  if(NOT PSTL_FOUND AND BUILD_MISSING_DEPENDENCIES)
+  find_package(TBB COMPONENTS tbbmalloc)
+  if(NOT TBB_FOUND)
+    if(BUILD_MISSING_DEPENDENCIES)
       include(external/tbb.cmake)
       include(external/parallelstl.cmake)
-  endif(NOT PSTL_FOUND AND BUILD_MISSING_DEPENDENCIES)
+    else(BUILD_MISSING_DEPENDENCIES)
+      message(FATAL_ERROR "Could NOT find Intel TBB library")
+    endif(BUILD_MISSING_DEPENDENCIES)
+  endif(NOT TBB_FOUND)
 endif(CMAKE_TOOLCHAIN_FILE)
 
 # find/clone Google Benchmark

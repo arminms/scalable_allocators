@@ -56,7 +56,7 @@
 #
 # This module will set the following variables:
 #
-# * PSTL_FOUND             - Set to false, or undefined, if we haven’t found, or
+# * TBB_FOUND             - Set to false, or undefined, if we haven’t found, or
 #                           don’t want to use TBB.
 # * TBB_<component>_FOUND - If False, optional <component> part of TBB sytem is
 #                           not available.
@@ -260,45 +260,28 @@ if(NOT PSTL_FOUND)
     set(TBB_DEFINITIONS "${TBB_DEFINITIONS_DEBUG}")
   endif()
 
-  ##################################
-  # Find ParallelSTL
-  ##################################
-
-  if(TBB_INCLUDE_DIRS)
-    string(FIND ${TBB_INCLUDE_DIRS} tbb pos)
-    if(${pos} EQUAL "-1")
-      unset(TBB_VERSION)
-      unset(TBB_INCLUDE_DIRS)
-      unset(TBB_LIBRARIES)
-    else()
-      string(REPLACE tbb pstl PSTL_INCLUDE_DIRS ${TBB_INCLUDE_DIRS})
-      if(EXISTS "${PSTL_INCLUDE_DIRS}")
-        message(STATUS "Found TBB: " ${TBB_INCLUDE_DIRS} " (found version \"" ${TBB_VERSION} "\")")
-      else()
-        unset(PSTL_INCLUDE_DIRS)
-      endif()
-    endif()
-  endif()
-
-  find_package_handle_standard_args(PSTL
-    REQUIRED_VARS PSTL_INCLUDE_DIRS TBB_INCLUDE_DIRS TBB_LIBRARIES
-    # HANDLE_COMPONENTS
+  find_package_handle_standard_args(TBB
+    REQUIRED_VARS TBB_INCLUDE_DIRS TBB_LIBRARIES
+    HANDLE_COMPONENTS
     VERSION_VAR TBB_VERSION)
 
   ##################################
   # Create targets
   ##################################
 
-  if(NOT CMAKE_VERSION VERSION_LESS 3.0 AND PSTL_FOUND)
-    add_library(pstl::ParallelSTL SHARED IMPORTED)
-    # add_library(ParallelSTL ALIAS ParallelSTL)
-    set_target_properties(pstl::ParallelSTL PROPERTIES
+  if(NOT CMAKE_VERSION VERSION_LESS 3.0 AND TBB_FOUND)
+    list(POP_FRONT TBB_LIBRARIES TBB_MALLOC)
+    list(POP_FRONT TBB_LIBRARIES_RELEASE)
+    list(POP_FRONT TBB_LIBRARIES_DEBUG)
+    add_library(TBB::tbbmalloc SHARED IMPORTED)
+    set_target_properties(TBB::tbbmalloc PROPERTIES
+          IMPORTED_LOCATION              ${TBB_MALLOC})
+    add_library(TBB::tbb SHARED IMPORTED)
+    set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_INCLUDE_DIRECTORIES  ${TBB_INCLUDE_DIRS}
           IMPORTED_LOCATION              ${TBB_LIBRARIES})
-    set_target_properties(pstl::ParallelSTL PROPERTIES
-          INTERFACE_INCLUDE_DIRECTORIES  ${PSTL_INCLUDE_DIRS})
     if(TBB_LIBRARIES_RELEASE AND TBB_LIBRARIES_DEBUG)
-      set_target_properties(pstl::ParallelSTL PROPERTIES
+      set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_COMPILE_DEFINITIONS "$<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:TBB_USE_DEBUG=1>"
           IMPORTED_LOCATION_DEBUG          ${TBB_LIBRARIES_DEBUG}
           IMPORTED_LOCATION_RELWITHDEBINFO ${TBB_LIBRARIES_DEBUG}
@@ -306,9 +289,9 @@ if(NOT PSTL_FOUND)
           IMPORTED_LOCATION_MINSIZEREL     ${TBB_LIBRARIES_RELEASE}
           )
     elseif(TBB_LIBRARIES_RELEASE)
-      set_target_properties(pstl::ParallelSTL PROPERTIES IMPORTED_LOCATION ${TBB_LIBRARIES_RELEASE})
+      set_target_properties(TBB::tbb PROPERTIES IMPORTED_LOCATION ${TBB_LIBRARIES_RELEASE})
     else()
-      set_target_properties(pstl::ParallelSTL PROPERTIES
+      set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_COMPILE_DEFINITIONS "${TBB_DEFINITIONS_DEBUG}"
           IMPORTED_LOCATION              ${TBB_LIBRARIES_DEBUG}
           )

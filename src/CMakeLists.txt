@@ -13,9 +13,8 @@ foreach(BENCHMARK ${BENCHMARKS})
   target_link_libraries(
     ${PERF_TARGET}
     ${BENCHMARK_TARGET}
-    ${TBB_IMPORTED_TARGETS}
-    # pstl::ParallelSTL
-    # -ltbbmalloc
+    TBB::tbbmalloc
+    TBB::tbb
   )
   install(TARGETS ${PERF_TARGET} RUNTIME DESTINATION bin COMPONENT ${PERF_TARGET})
 endforeach()
