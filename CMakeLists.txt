@@ -32,9 +32,9 @@ project(Scalable-Allocators)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH true)
 
-# if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
-#   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -qopenmp-simd -ipo -O3 -xSSE4.2")
-# endif()
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -qopenmp-simd -ipo -O3 -axSSE4.2,SSE4.1,SSSE3,SSE3,SSE2")
+endif()
 
 option(BUILD_MISSING_DEPENDENCIES "Clone/Build missing dependencies ?" OFF)
 
