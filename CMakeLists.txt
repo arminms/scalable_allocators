@@ -8,7 +8,7 @@ if(${USE_VCPKG} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     find_file(VCPKG_PATH_TXT vcpkg.path.txt
       PATHS $ENV{HOME}
       PATH_SUFFIXES .vcpkg
-      )
+    )
     if(VCPKG_PATH_TXT)
       file(READ ${VCPKG_PATH_TXT} VCPKG_PATH)
       set(CMAKE_TOOLCHAIN_FILE "${VCPKG_PATH}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
@@ -17,9 +17,9 @@ if(${USE_VCPKG} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
   endif(UNIX)
   if(NOT DEFINED VCPKG_PATH)
     find_path(VCPKG_PATH .vcpkg-root
-      PATHS $ENV{HOME} / /opt /opt/local /usr /usr/local /usr/local/share
+      PATHS $ENV{USERPROFILE} /
       PATH_SUFFIXES vcpkg src/vcpkg
-      )
+    )
     if(VCPKG_PATH)
       set(CMAKE_TOOLCHAIN_FILE "${VCPKG_PATH}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
       message(STATUS "Using vcpkg CMake toolchain file: " ${CMAKE_TOOLCHAIN_FILE})
