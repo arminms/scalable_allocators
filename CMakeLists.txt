@@ -36,13 +36,13 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -qopenmp-simd -ipo -O3 -axSSE4.2,SSE4.1,SSSE3,SSE3,SSE2")
 endif()
 
-option(BUILD_MISSING_DEPENDENCIES "Clone/Build missing dependencies ?" ON)
-
 # Visual Studio C++ specific
 if(MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4244") # Warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4267") # Warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 endif(MSVC)
+
+option(BUILD_MISSING_DEPENDENCIES "Clone/Build missing dependencies ?" ON)
 
 # check/add compiler OpenMP support flags
 find_package(OpenMP)
@@ -50,7 +50,7 @@ if (OPENMP_FOUND OR OPENMP_CXX_FOUND)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 
-# find/clone Intel Threading Building Blocks (TBB)
+# find Intel Threading Building Blocks (TBB)
 if(CMAKE_TOOLCHAIN_FILE)
   find_package(TBB CONFIG REQUIRED)
   message(STATUS "Found Intel TBB library")
@@ -68,11 +68,13 @@ else(CMAKE_TOOLCHAIN_FILE)
       CONFIG
       HINTS /usr/local /opt/local /opt $ENV{HOME}
     )
-  if(BUILD_MISSING_DEPENDENCIES)
-    include(external/benchmark.cmake)
-  else(BUILD_MISSING_DEPENDENCIES)
-    message(FATAL_ERROR "Could NOT find Google Benchmark library")
-  endif(BUILD_MISSING_DEPENDENCIES)
+  if(NOT benchmark_DIR)
+    if(BUILD_MISSING_DEPENDENCIES)
+      include(external/benchmark.cmake)
+    else(BUILD_MISSING_DEPENDENCIES)
+      message(FATAL_ERROR "Could NOT find Google Benchmark library")
+    endif(BUILD_MISSING_DEPENDENCIES)
+  endif(NOT benchmark_DIR)
 endif(CMAKE_TOOLCHAIN_FILE)
 
 option(BUILD_TESTS "Build the unit tests ?" OFF)
