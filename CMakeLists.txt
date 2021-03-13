@@ -55,14 +55,7 @@ if(CMAKE_TOOLCHAIN_FILE)
   find_package(TBB CONFIG REQUIRED)
   message(STATUS "Found Intel TBB library")
 else(CMAKE_TOOLCHAIN_FILE)
-  find_package(TBB COMPONENTS tbbmalloc)
-  if(NOT TBB_FOUND)
-    if(BUILD_MISSING_DEPENDENCIES)
-      include(external/tbb.cmake)
-    else(BUILD_MISSING_DEPENDENCIES)
-      message(FATAL_ERROR "Could NOT find Intel TBB library")
-    endif(BUILD_MISSING_DEPENDENCIES)
-  endif(NOT TBB_FOUND)
+  find_package(TBB REQUIRED COMPONENTS tbbmalloc)
 endif(CMAKE_TOOLCHAIN_FILE)
 
 # find/clone Google Benchmark
@@ -75,7 +68,11 @@ else(CMAKE_TOOLCHAIN_FILE)
       CONFIG
       HINTS /usr/local /opt/local /opt $ENV{HOME}
     )
-  include(external/benchmark.cmake)
+  if(BUILD_MISSING_DEPENDENCIES)
+    include(external/benchmark.cmake)
+  else(BUILD_MISSING_DEPENDENCIES)
+    message(FATAL_ERROR "Could NOT find Google Benchmark library")
+  endif(BUILD_MISSING_DEPENDENCIES)
 endif(CMAKE_TOOLCHAIN_FILE)
 
 option(BUILD_TESTS "Build the unit tests ?" OFF)
