@@ -77,7 +77,7 @@ else(CMAKE_TOOLCHAIN_FILE)
   endif(NOT benchmark_DIR)
 endif(CMAKE_TOOLCHAIN_FILE)
 
-option(BUILD_TESTS "Build the unit tests ?" OFF)
+option(BUILD_TESTS "Build the unit tests ?" ON)
 if(${BUILD_TESTS})
   find_package(Boost 1.61 REQUIRED COMPONENTS system unit_test_framework)
   enable_testing()
