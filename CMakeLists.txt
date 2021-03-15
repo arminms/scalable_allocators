@@ -58,6 +58,13 @@ else(CMAKE_TOOLCHAIN_FILE)
   find_package(TBB REQUIRED COMPONENTS tbbmalloc)
 endif(CMAKE_TOOLCHAIN_FILE)
 
+option(BUILD_TESTS "Build the unit tests ?" ON)
+if(${BUILD_TESTS})
+  find_package(Boost 1.70 REQUIRED COMPONENTS system unit_test_framework)
+  enable_testing()
+  add_subdirectory(test)
+endif()
+
 # find/clone Google Benchmark
 if(CMAKE_TOOLCHAIN_FILE)
   find_package(benchmark CONFIG REQUIRED)
@@ -76,12 +83,5 @@ else(CMAKE_TOOLCHAIN_FILE)
     endif(BUILD_MISSING_DEPENDENCIES)
   endif(NOT benchmark_DIR)
 endif(CMAKE_TOOLCHAIN_FILE)
-
-option(BUILD_TESTS "Build the unit tests ?" ON)
-if(${BUILD_TESTS})
-  find_package(Boost 1.61 REQUIRED COMPONENTS system unit_test_framework)
-  enable_testing()
-  add_subdirectory(test)
-endif()
 
 add_subdirectory(src)

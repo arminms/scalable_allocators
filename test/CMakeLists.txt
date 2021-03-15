@@ -1,9 +1,9 @@
 include_directories(../include)
 
-# use dynamic link library of boost test framework
-if(NOT MSVC AND VCPKG_PATH)
+# use dynamic link library when possible
+if( NOT MSVC AND NOT VCPKG_PATH )
   add_definitions(-DBOOST_TEST_DYN_LINK)
-endif(NOT MSVC AND VCPKG_PATH)
+endif()
 
 add_executable(test_rmsd test_rmsd.cpp)
 target_compile_features(test_rmsd PRIVATE cxx_std_17)
