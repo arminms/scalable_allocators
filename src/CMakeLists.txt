@@ -4,6 +4,7 @@ include_directories(../include)
 set(BENCHMARKS
   generate_randoms
   rmsd
+  norm2
 )
 
 foreach(BENCHMARK ${BENCHMARKS})
