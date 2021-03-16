@@ -24,6 +24,7 @@ platforms (Linux/Windows/MacOS).
 
 ### Third-party libraries:
 
+* [Intel's Threading Building Block (now OneTBB)](https://github.com/oneapi-src/oneTBB)
 * [Boost C++ libraries](https://www.boost.org/) 1.70 or higher. It is only
    necessary if you want to build unit tests. Just `boost.system` and
    `boost.test` would suffice.
@@ -33,7 +34,8 @@ platforms (Linux/Windows/MacOS).
 
 The `CMake` script configured in a way that if it cannot find the optional
 third-party libraries it tries to download and build them automatically. So,
-there is no need to do anything if they are missing.
+there is no need to do anything if they are missing but you need a
+working internet connection.
 ### Building using CMake
 On all platforms (Linux/Windows/MacOS), you can use the following commands:
 ```
@@ -65,7 +67,13 @@ and wait till the CMake configuration finishes. Now, you can build/run/debug usi
 the buttons provided by `CMake Tools` extension on the status bar.
 ## Running unit tests
 After building the program successfully, you can run the unit tests by typing
-`ctest` or `make test`.
+`ctest` or `make test`:
+```
+$ ctest
+Running 3 test cases...
+
+*** No errors detected
+```
 ## Running benchmarks
 After buliding, you will find all the benchmarks in `build/src` dirctory:
 ```
