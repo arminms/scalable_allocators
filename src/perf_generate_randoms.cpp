@@ -6,7 +6,6 @@
 #include <execution>
 
 #include <tbb/scalable_allocator.h>
-#include <tbb/cache_aligned_allocator.h>
 
 #include <benchmark/benchmark.h>
 

@@ -22,8 +22,8 @@ static void RMSD(
 {
     size_t d = 3; // dimension
 
-    std::vector<double> A(st.range() * d);
-    std::vector<double> B(st.range() * d);
+    std::vector<float> A(st.range() * d);
+    std::vector<float> B(st.range() * d);
 
     generate_randoms(ep, A.begin(), B.begin(), st.range(), d);
 

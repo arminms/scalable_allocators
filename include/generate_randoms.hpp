@@ -13,6 +13,35 @@ template
 <
     class ExecutionPolicy
 ,   class OutputIt
+,   class Size
+>
+inline void generate_randoms(
+    ExecutionPolicy&& policy
+,   OutputIt out
+,   Size n)
+{
+    typedef typename std::iterator_traits<OutputIt>::value_type T;
+
+    std::hash<std::thread::id> hasher;
+    std::uniform_real_distribution<T> dist(T(-50), T(50));
+    std::for_each(
+        std::forward<ExecutionPolicy>(policy)
+    ,   tbb::counting_iterator<Size>(0)
+    ,   tbb::counting_iterator<Size>(n)
+    ,   [&] (Size i)
+    {
+        // thread_local std::mt19937 rng(hasher(std::this_thread::get_id()));
+        thread_local std::default_random_engine rng(hasher(std::this_thread::get_id()));
+        *(out+i) = dist(rng);
+    } );
+}
+
+//----------------------------------------------------------------------------//
+
+template
+<
+    class ExecutionPolicy
+,   class OutputIt
 ,   class Size1
 ,   class Size2
 >
