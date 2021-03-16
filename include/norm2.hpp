@@ -20,9 +20,9 @@ inline T norm_2(
 {
     return std::sqrt(std::reduce(
         std::forward<ExecutionPolicy>(policy)
-    ,   first+1
+    ,   first
     ,   last
-    ,   *first * *first
+    ,   T(0)
     ,   [] (T lhs, T rhs) { return lhs + (rhs * rhs); }
     )   );
 }
