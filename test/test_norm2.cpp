@@ -20,14 +20,14 @@ BOOST_AUTO_TEST_CASE( NORM2_FLOAT_SEQ )
     BOOST_CHECK_CLOSE(norm_2(std::execution::seq, lv.begin(), lv.end()), 7.348469, 0.001);
 }
 
-BOOST_AUTO_TEST_CASE( NORM2_FLOAT_PAR_5K )
+BOOST_AUTO_TEST_CASE( NORM2_FLOAT_PAR_10K )
 {
-    std::vector<float> A(5000);
+    std::vector<float> A(10000);
 
-    generate_randoms(std::execution::par, A.begin(), 5000);
+    generate_randoms(std::execution::seq, A.begin(), 10000);
 
     BOOST_CHECK_CLOSE(
-        norm_2(std::execution::seq, A.begin(), A.begin() + 5000)
-    ,   norm_2(std::execution::par, A.begin(), A.begin() + 5000)
+        norm_2<float>(std::execution::seq, A.begin(), A.begin() + 10000)
+    ,   norm_2<float>(std::execution::par, A.begin(), A.begin() + 10000)
     ,   0.00001);
 }

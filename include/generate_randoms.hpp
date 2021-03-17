@@ -23,7 +23,7 @@ inline void generate_randoms(
     typedef typename std::iterator_traits<OutputIt>::value_type T;
 
     std::hash<std::thread::id> hasher;
-    std::uniform_real_distribution<T> dist(T(-50), T(50));
+    std::uniform_real_distribution<T> dist(T(-1), T(1));
     std::for_each(
         std::forward<ExecutionPolicy>(policy)
     ,   tbb::counting_iterator<Size>(0)
