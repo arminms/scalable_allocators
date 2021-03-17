@@ -19,7 +19,7 @@ static void norm2(
 {
     std::vector<float> A(st.range());
 
-    generate_randoms(ep, A.begin(), st.range());
+    generate_randoms(std::execution::seq, A.begin(), st.range());
 
     for (auto _ : st)
     {   // This code gets timed
@@ -59,7 +59,7 @@ static void norm2_TBBSA(
     std::vector<float, tbb::scalable_allocator<float>> A(st.range());
     // std::vector<float, tbb::cache_aligned_allocator<float>> A(st.range() * d);
 
-    generate_randoms(ep, A.begin(), st.range());
+    generate_randoms(std::execution::seq, A.begin(), st.range());
 
     for (auto _ : st)
     {   // This code gets timed
