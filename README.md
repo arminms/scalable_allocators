@@ -78,38 +78,38 @@ Running 3 test cases...
 After buliding, you will find all the benchmarks in `build/src` dirctory:
 ```
 $ src/perf_rmsd
-2021-03-15T23:17:19-04:00
-Running src/perf_rmsd
+2021-03-16T22:40:24-04:00
+Running /home/asobhani/development/scalable_allocators/build/src/perf_rmsd
 Run on (40 X 3700 MHz CPU s)
 CPU Caches:
   L1 Data 32 KiB (x40)
   L1 Instruction 32 KiB (x40)
   L2 Unified 1024 KiB (x40)
   L3 Unified 28160 KiB (x2)
-Load Average: 0.56, 0.83, 1.21
+Load Average: 2.08, 1.99, 2.26
 ------------------------------------------------------------------
 Benchmark                        Time             CPU   Iterations
 ------------------------------------------------------------------
-RMSD/seq/1048576              4.09 ms         4.08 ms          174
-RMSD/seq/2097152              9.45 ms         9.43 ms           81
-RMSD/seq/4194304              20.0 ms         19.9 ms           38
-RMSD/seq/8388608              37.7 ms         37.6 ms           19
-RMSD/seq/16777216             74.0 ms         73.8 ms            7
-RMSD/par/1048576             0.281 ms        0.280 ms         2502
-RMSD/par/2097152             0.946 ms        0.943 ms          732
-RMSD/par/4194304              2.30 ms         2.30 ms          292
-RMSD/par/8388608              5.12 ms         5.11 ms          122
-RMSD/par/16777216             11.3 ms         11.2 ms           52
-RMSD_TBBSA/seq/1048576        3.73 ms         3.72 ms          188
-RMSD_TBBSA/seq/2097152        7.58 ms         7.56 ms           92
-RMSD_TBBSA/seq/4194304        15.4 ms         15.4 ms           46
-RMSD_TBBSA/seq/8388608        30.7 ms         30.6 ms           23
-RMSD_TBBSA/seq/16777216       61.1 ms         61.0 ms           11
-RMSD_TBBSA/par/1048576       0.155 ms        0.155 ms         4552
-RMSD_TBBSA/par/2097152       0.337 ms        0.336 ms         2077
-RMSD_TBBSA/par/4194304       0.958 ms        0.955 ms          751
-RMSD_TBBSA/par/8388608        2.31 ms         2.31 ms          292
-RMSD_TBBSA/par/16777216       5.13 ms         5.12 ms          125
+RMSD/seq/1048576              3.87 ms         3.86 ms          181
+RMSD/seq/2097152              8.48 ms         8.46 ms           88
+RMSD/seq/4194304              16.7 ms         16.6 ms           42
+RMSD/seq/8388608              32.5 ms         32.4 ms           22
+RMSD/seq/16777216             69.2 ms         69.1 ms           11
+RMSD/par/1048576             0.165 ms        0.164 ms         4117
+RMSD/par/2097152             0.329 ms        0.328 ms         1784
+RMSD/par/4194304             0.978 ms        0.976 ms          715
+RMSD/par/8388608              2.39 ms         2.38 ms          277
+RMSD/par/16777216             5.35 ms         5.33 ms          123
+RMSD_TBBSA/seq/1048576        3.89 ms         3.88 ms          186
+RMSD_TBBSA/seq/2097152        7.84 ms         7.82 ms           91
+RMSD_TBBSA/seq/4194304        15.6 ms         15.5 ms           45
+RMSD_TBBSA/seq/8388608        31.6 ms         31.5 ms           22
+RMSD_TBBSA/seq/16777216       62.6 ms         62.5 ms           11
+RMSD_TBBSA/par/1048576       0.167 ms        0.166 ms         4282
+RMSD_TBBSA/par/2097152       0.363 ms        0.360 ms         1950
+RMSD_TBBSA/par/4194304       0.990 ms        0.985 ms          721
+RMSD_TBBSA/par/8388608        2.38 ms         2.37 ms          291
+RMSD_TBBSA/par/16777216       5.29 ms         5.26 ms          127
 ```
 Using `--help` shows all the available options for running the benchmark:
 
