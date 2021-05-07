@@ -15,6 +15,9 @@ simply relinking with a scalable memory allocator.
 `scalable_allocators` is a benchmark for using
 [Intel TBB's](https://github.com/oneapi-src/oneTBB)
 `scalable_allocator` in C++17 parallel algorithms.
+
+There is a video recording available for this repository on [YouTube](https://www.youtube.com/watch?v=1UGwixrLQGU).
+
 ## Building from Source
 `scalable_allocators` can be built using [CMake](https://cmake.org/) on multiple
 platforms (Linux/Windows/MacOS).
